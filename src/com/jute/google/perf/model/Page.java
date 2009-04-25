@@ -1,4 +1,4 @@
-package com.jute.google.log.model;
+package com.jute.google.perf.model;
 
 import com.google.appengine.api.users.User;
 
