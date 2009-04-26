@@ -53,7 +53,7 @@ public class AddDataPointAction extends Action {
                 pm.makePersistent(point);                
                 Properties properties = page.getProperties();
                 properties.setProperty("last_total",""+point.getTotalTime());
-                properties.setProperty("last_modified",""+System.currentTimeMillis()/1000);
+                properties.setProperty("last_modified",(int) (System.currentTimeMillis()/1000l)+"");
                 page.setProperties(properties);
                 pm.makePersistent(page);
             } finally {

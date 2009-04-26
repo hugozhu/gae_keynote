@@ -10,11 +10,11 @@
     </tr>
     <%
         List<Page> pages = (List<Page>) request.getAttribute("pages");
-        int now = (int) (System.currentTimeMillis()/1000);
+        int now = (int) (System.currentTimeMillis()/1000l);
         for(Page p: pages) {
             Properties props = p.getProperties();
             int before = now;
-            if (props.contains("last_modified")) {
+            if (props.containsKey("last_modified")) {
                 before = Integer.parseInt((String)props.get("last_modified"));
             }
             int diff = now - before;

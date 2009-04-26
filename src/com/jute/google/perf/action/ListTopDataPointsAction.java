@@ -24,7 +24,7 @@ public class ListTopDataPointsAction extends Action {
         context.put("page",pm.getObjectById(Page.class,pageId));
         Query query = pm.newQuery(DataPoint.class);
         query.setFilter("pageId == pageIdParam");
-        query.setOrdering("id desc");
+        query.setOrdering("date desc");
         query.declareParameters("Long pageIdParam");
         query.setRange(0,120);
         List<DataPoint> points = (List<DataPoint>) query.execute(pageId);
