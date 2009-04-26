@@ -1,9 +1,13 @@
 package com.jute.google.perf.model;
 
 import com.google.appengine.api.users.User;
+import com.google.appengine.api.datastore.Text;
 
 import javax.jdo.annotations.*;
 import java.util.Date;
+import java.util.Map;
+import java.util.Properties;
+import java.io.*;
 
 /**
  * User: hugozhu
@@ -26,6 +30,8 @@ public class Page {
     @Persistent
     private Date created;
 
+    @Persistent
+    private Text properties;
 
     public Page(String url) {
         this.url = url;
@@ -62,5 +68,26 @@ public class Page {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public Properties getProperties() {
+        Properties props = new Properties();
+        try {
+            if (properties!=null) {
+                props.loadFromXML(new ByteArrayInputStream(properties.getValue().getBytes("UTF-8")));
+            }
+        } catch (IOException e) {            
+        }
+        return props;
+    }
+
+    public void setProperties(Properties props) {
+        try {
+            OutputStream os = new ByteArrayOutputStream();
+            props.storeToXML(os,"","UTF-8");
+            String text = os.toString();
+            this.properties = new Text(text);
+        } catch (IOException e) {
+        }
     }
 }

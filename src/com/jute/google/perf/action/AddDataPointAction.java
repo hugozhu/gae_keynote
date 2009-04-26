@@ -14,6 +14,8 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import java.util.Map;
 import java.util.List;
+import java.util.Date;
+import java.util.Properties;
 import java.net.URL;
 
 /**
@@ -48,7 +50,12 @@ public class AddDataPointAction extends Action {
                 if (response.getContent()!=null) {
                     point.setLength( String.valueOf(response.getContent().length));
                 }
-                pm.makePersistent(point);
+                pm.makePersistent(point);                
+                Properties properties = page.getProperties();
+                properties.setProperty("last_total",""+point.getTotalTime());
+                properties.setProperty("last_modified",""+System.currentTimeMillis()/1000);
+                page.setProperties(properties);
+                pm.makePersistent(page);
             } finally {
                 pm.close();
             }
