@@ -1,5 +1,7 @@
 package com.jute.google.perf.model;
 
+import com.google.appengine.api.datastore.Key;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -22,7 +24,7 @@ public class DataPoint {
     private Date date;
 
     @Persistent
-    private Page page;
+    private Long pageId;
 
     @Persistent
     int connectTime;
@@ -31,13 +33,16 @@ public class DataPoint {
     int readTime;
 
     @Persistent
-    int error;
+    int code;
 
-    public DataPoint(Page page, int connectTime, int readTime, int error) {
-        this.page = page;
+    @Persistent
+    String length;
+
+    public DataPoint(Long pageId, int connectTime, int readTime, int code) {
+        this.pageId = pageId;
         this.connectTime = connectTime;
         this.readTime = readTime;
-        this.error = error;
+        this.code = code;
         this.date = new Date();
     }
 
@@ -57,12 +62,12 @@ public class DataPoint {
         this.date = date;
     }
 
-    public Page getPage() {
-        return page;
+    public Long getPageId() {
+        return pageId;
     }
 
-    public void setPage(Page page) {
-        this.page = page;
+    public void setPageId(Long pageId) {
+        this.pageId = pageId;
     }
 
     public int getConnectTime() {
@@ -81,11 +86,23 @@ public class DataPoint {
         this.readTime = readTime;
     }
 
-    public int getError() {
-        return error;
+    public int getCode() {
+        return code;
     }
 
-    public void setError(int error) {
-        this.error = error;
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public int getTotalTime() {
+        return this.readTime+this.connectTime;
+    }
+
+    public String getLength() {
+        return length;
+    }
+
+    public void setLength(String length) {
+        this.length = length;
     }
 }

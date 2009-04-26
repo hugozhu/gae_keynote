@@ -1,4 +1,4 @@
-package com.jute.google;
+package com.jute.google.framework;
 
 /**
  * User: hugozhu
@@ -15,7 +15,7 @@ import javax.jdo.PersistenceManagerFactory;
 public final class PMF {
 
   private static final PersistenceManagerFactory INSTANCE =
-      JDOHelper.getPersistenceManagerFactory("transactional");
+      JDOHelper.getPersistenceManagerFactory("transactions-optional");
 
   public static PersistenceManagerFactory get() {
     return INSTANCE;

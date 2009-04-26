@@ -20,15 +20,16 @@ public class Page {
     private User author;
 
     @Persistent
+    @Unique
     private String url;
 
     @Persistent
     private Date created;
 
 
-    public Page(User author, String url) {
-        this.author = author;
+    public Page(String url) {
         this.url = url;
+        this.created = new Date();
     }
 
     public Long getId() {

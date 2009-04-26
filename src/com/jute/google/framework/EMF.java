@@ -1,4 +1,4 @@
-package com.jute.google;
+package com.jute.google.framework;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

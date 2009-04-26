@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fwww.dxy.cn%2Fcms%2F</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fwww.jobmd.cn%2Findex.htm</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Ftong.dxy.cn%2F</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fwww.dxy.cn%2Fbbs%2Findex.html</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fwww.dxyer.cn%2F</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fwww.bioon.com%2F</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fwww.bioon.com.cn%2F</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>    
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fwww.taobao.com%2F</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fwww.haoyisheng.com%2F</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fwww.iiyi.com%2F</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fwww.dxy.cn%2F404%2Ferror.html</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+    
+</cronentries>
