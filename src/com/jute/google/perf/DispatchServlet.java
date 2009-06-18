@@ -36,6 +36,7 @@ public class DispatchServlet extends HttpServlet {
         actions.put("/add", new AddDataPointAction());
         actions.put("/index", new ListPagesAction());
         actions.put("/top_data_points", new ListTopDataPointsAction());
+        actions.put("/clear_data_points", new ClearOldDataPointsAction());
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp)

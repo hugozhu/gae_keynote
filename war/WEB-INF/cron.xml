@@ -55,5 +55,14 @@
     <description>Check latency every 1 minutes</description>
     <schedule>every 1 minutes</schedule>
   </cron>
-    
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fwww.dxy.cn%2Fbbs%2Fstatus.jsp</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/perf/add?url=http%3A%2F%2Fbeta.jobmd.cn%2F</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
 </cronentries>

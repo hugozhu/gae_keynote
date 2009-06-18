@@ -83,5 +83,4 @@ public class DebugServlet extends HttpServlet {
 			res.getWriter().println(obj.toString());
 		}
 	}
-	
 }
