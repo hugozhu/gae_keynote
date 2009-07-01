@@ -43,7 +43,7 @@ public class AlertAction extends Action {
                 }
             }
             if (error >= 3) {
-                subject = "[Alert] "+error+" errors in last 5 minutes";
+                subject = "[Alert] "+page.getUrl()+": "+error+" errors in last 5 minutes";
                 body = "Please check http://jute.appspot.com/perf/top_data_points?id="+page.getId();
                 Mailer.send(subject, body, to);                
             }
