@@ -11,11 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
 public class DebugServlet extends HttpServlet {
+    public int testVar = 1;
+    public static int testStaticVar = 1;
 
 	@SuppressWarnings("unchecked")
 	@Override
     public void doGet(HttpServletRequest req, HttpServletResponse res)
     throws IOException {
+        testVar++;
+        testStaticVar++;
 		res.setContentType("text/html;charset=UTF-8");
 		print(res,"<html><head><title></title><style> * {font-family:Arial}</style></head><body>");
 		print(res,"<h1>Google AppEngine Enviorment Information</h1>");	
@@ -65,8 +69,12 @@ public class DebugServlet extends HttpServlet {
 		print(res,"<ul>System Properties");
 		print(res,props);
 		print(res,"</ul");
-		
-		print(res,"</body></html>");		
+
+        print(res,"<ul>");
+        print(res,"<li>testVar: "+testVar+"</li>");
+		print(res,"<li>testStaticVar: "+testStaticVar+"</li>");
+        print(res,"</ul");
+        print(res,"</body></html>");
 	}
 	private void print(HttpServletResponse res, String name, Object value)  throws IOException {
 		res.getWriter().println(String.format("<li><strong>%s</strong>: %s</li>",name, String.valueOf(value)));

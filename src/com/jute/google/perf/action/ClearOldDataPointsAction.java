@@ -26,9 +26,11 @@ public class ClearOldDataPointsAction  extends Action {
         query.setOrdering("date asc");
         query.setRange(0,200);
         Date threeMonthAgo = new Date();
-        threeMonthAgo.setTime(threeMonthAgo.getTime()-24*3600*30*1000l);
+        threeMonthAgo.setTime(threeMonthAgo.getTime()-3*24*3600*30*1000l);
         List<DataPoint> points = (List<DataPoint>) query.execute(threeMonthAgo);
-        pm.deletePersistentAll(points);
+        if (points.size()>0) {
+            pm.deletePersistentAll(points);
+        }
         resp.getWriter().println(points.size());
         return null;
     }

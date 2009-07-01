@@ -6,7 +6,7 @@
     <schedule>every 1 minutes</schedule>
   </cron>
   <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.jobmd.cn%2Findex.htm</url>
+    <url>/perf/add?url=http%3A%2F%2Fwww.jobmd.cn%2F</url>
     <description>Check latency every 1 minutes</description>
     <schedule>every 1 minutes</schedule>
   </cron>
@@ -61,8 +61,13 @@
     <schedule>every 1 minutes</schedule>
   </cron>
   <cron>
-    <url>/perf/add?url=http%3A%2F%2Fbeta.jobmd.cn%2F</url>
-    <description>Check latency every 1 minutes</description>
+    <url>/perf/clear_data_points</url>
+    <description>Delete data 1 month ago</description>
     <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/perf/alert</url>
+    <description>Check if there are errors</description>
+    <schedule>every 5 minutes</schedule>
   </cron>
 </cronentries>
