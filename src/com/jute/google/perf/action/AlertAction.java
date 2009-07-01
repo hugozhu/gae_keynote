@@ -23,7 +23,7 @@ public class AlertAction extends Action {
         String to = req.getParameter("to");
         String subject = null;
         String body =  null;        
-        if (to==null || to.indexOf("@")<-1) {
+        if (to==null || to.indexOf("@")<0) {
             to = "hugozhu@gmail.com";
         }
         PersistenceManager pm = PMF.get().getPersistenceManager();
@@ -42,8 +42,8 @@ public class AlertAction extends Action {
                     error++;
                 }
             }
-            if (error >= 3) {
-                subject = "[Alert] "+page.getUrl()+": "+error+" errors in last 5 minutes";
+            if (error >= 4) {
+                subject = "[Alert] "+page.getUrl()+" - "+error+" errors in last 5 minutes";
                 body = "Please check http://jute.appspot.com/perf/top_data_points?id="+page.getId();
                 Mailer.send(subject, body, to);                
             }
