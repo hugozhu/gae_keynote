@@ -66,7 +66,7 @@
     <schedule>every 1 minutes</schedule>
   </cron>
   <cron>
-    <url>/perf/alert?to=dev%40dxyer.cn</url>
+    <url>/perf/alert?to=dev%40dxyer.com</url>
     <description>Check if there are errors</description>
     <schedule>every 5 minutes</schedule>
   </cron>
