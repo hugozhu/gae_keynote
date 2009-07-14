@@ -39,6 +39,7 @@ public class DispatchServlet extends HttpServlet {
         actions.put("/clear_data_points", new ClearOldDataPointsAction());
         actions.put("/alert", new AlertAction());
         actions.put("/delete_page", new DeletePageAction());
+        actions.put("/update_page", new UpdatePageAction());
 
     }
 

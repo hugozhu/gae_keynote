@@ -13,28 +13,29 @@ import java.util.List;
 
 /**
  * User: hugozhu
- * Date: Jul 1, 2009
- * Time: 11:33:22 PM
+ * Date: Jul 15, 2009
+ * Time: 12:36:56 AM
  */
-public class DeletePageAction  extends Action {
+public class UpdatePageAction  extends Action {
 
     public String execute(Map context, HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        String url = req.getParameter("url");
-        if (url!=null) {
+        long id = Integer.parseInt(req.getParameter("id"));
+        if (id>0) {
             PersistenceManager pm = PMF.get().getPersistenceManager();
 
-            Query query = pm.newQuery(Page.class, "url == nameParam");
-            query.declareParameters("String nameParam");
+            Query query = pm.newQuery(Page.class, "id == idParam");
+            query.declareParameters("long idParam");
             Page page;
-            List<Page> pages = (List<Page>) query.execute(url);
+            List<Page> pages = (List<Page>) query.execute(id);
             if (pages != null && !pages.isEmpty()) {
                 page = pages.get(0);
-                pm.deletePersistent(page);
+                page.setStatus(req.getParameter("status"));
+                pm.makePersistent(page);
             }
             pm.close();
-            return null;
         }
-        resp.sendError(403);
+        resp.sendRedirect("./");
         return null;
     }
 }
+

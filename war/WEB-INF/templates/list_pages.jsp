@@ -7,6 +7,7 @@
         <th>Page</th>
         <th>Latency</th>
         <th>Time</th>
+        <th>Alert</th>
     </tr>
     <%
         List<Page> pages = (List<Page>) request.getAttribute("pages");
@@ -18,11 +19,23 @@
                 before = Integer.parseInt((String)props.get("last_modified"));
             }
             int diff = now - before;
+            String status = p.getStatus();
+            String action = null;
+            if (status==null || status.length()==0) {
+                status = "Set Alert";
+                action = "update_page?id="+p.getId()+"&status=alert";
+            }
+            else {
+                status = "Unset Alert";
+                action = "update_page?id="+p.getId()+"&status=";
+            }
+
     %>
     <tr>
         <td><a href="top_data_points?id=<%=p.getId()%>"><%=p.getUrl()%></a></td>
         <td><%=props.get("last_total")%> ms</td>
         <td><%=diff%> seconds ago</td>
+        <td><a href="<%=action%>"><%=status%></a></td>
     </tr>
     <%
         }

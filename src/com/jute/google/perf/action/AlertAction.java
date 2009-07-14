@@ -42,7 +42,7 @@ public class AlertAction extends Action {
                     error++;
                 }
             }
-            if (error >= 4) {
+            if (error >= 4 && page.getStatus()!=null && page.getStatus().contains("alert")) {
                 subject = "[Alert] "+page.getUrl()+" - "+error+" errors in last 5 minutes";
                 body = "Please check http://jute.appspot.com/perf/top_data_points?id="+page.getId();
                 Mailer.send(subject, body, to);                

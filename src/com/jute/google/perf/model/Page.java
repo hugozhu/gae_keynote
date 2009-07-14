@@ -33,6 +33,8 @@ public class Page {
     @Persistent
     private Text properties;
 
+    private String status;
+
     public Page(String url) {
         this.url = url;
         this.created = new Date();
@@ -89,5 +91,13 @@ public class Page {
             this.properties = new Text(text);
         } catch (IOException e) {
         }
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
