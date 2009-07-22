@@ -1,5 +1,7 @@
 package com.jute.google;
 
+import com.google.inject.Singleton;
+
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Map;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
+@Singleton
 public class DebugServlet extends HttpServlet {
     public int testVar = 1;
     public static int testStaticVar = 1;

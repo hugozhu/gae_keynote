@@ -1,10 +1,12 @@
 package com.jute.google.perf.action;
 
-import com.jute.google.framework.Action;
 import com.jute.google.framework.PMF;
+import com.jute.google.framework.AbstractAction;
+import com.jute.google.framework.Path;
 import com.jute.google.util.Mailer;
 import com.jute.google.perf.model.Page;
 import com.jute.google.perf.model.DataPoint;
+import com.google.inject.Singleton;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +20,9 @@ import java.util.List;
  * Date: Jul 1, 2009
  * Time: 11:21:40 PM
  */
-public class AlertAction extends Action {
+@Singleton
+@Path(id="/alert")
+public class AlertAction extends AbstractAction {
     public String execute(Map context, HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String to = req.getParameter("to");
         String subject = null;
@@ -28,7 +32,10 @@ public class AlertAction extends Action {
         }
         PersistenceManager pm = PMF.get().getPersistenceManager();
         Query query = pm.newQuery(Page.class);
-        List<Page> pages = (List<Page>) query.execute();        
+        query.setFilter("status == statusParam");
+        query.declareParameters("String statusParam");
+        List<Page> pages = (List<Page>) query.execute("alert");
+        resp.setContentType("text/plain; charset=UTF-8");
         for(Page page: pages) {
             query = pm.newQuery(DataPoint.class);
             query.setFilter("pageId == pageIdParam");
@@ -42,9 +49,10 @@ public class AlertAction extends Action {
                     error++;
                 }
             }
-            if (error >= 4 && page.getStatus()!=null && page.getStatus().contains("alert")) {
+            resp.getWriter().println(error+"\t"+page.getUrl());
+            if (error >= 4) {
                 subject = "[Alert] "+page.getUrl()+" - "+error+" errors in last 5 minutes";
-                body = "Please check http://jute.appspot.com/perf/top_data_points?id="+page.getId();
+                body = "Please check http://jute.appspot.com/perf/top_data_points?id="+page.getId() +" \n"+page.getStatus();
                 Mailer.send(subject, body, to);                
             }
         }

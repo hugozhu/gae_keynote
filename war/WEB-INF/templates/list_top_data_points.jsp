@@ -12,7 +12,7 @@
     DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     format.setTimeZone(timezone);
 %>
-<h1><%=mypage.getUrl()%> latest performance data:</h1>
+<h1><a href="<%=mypage.getUrl()%>" target="_blank"><%=mypage.getUrl()%></a> latest performance data:</h1>
 <table border="1">
     <tr>
         <th>Date</th>

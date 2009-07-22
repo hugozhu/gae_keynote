@@ -1,7 +1,8 @@
 package com.jute.google.perf.action;
 
-import com.jute.google.framework.Action;
 import com.jute.google.framework.PMF;
+import com.jute.google.framework.AbstractAction;
+import com.jute.google.framework.Path;
 import com.jute.google.perf.model.DataPoint;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,8 @@ import java.util.Date;
  * Date: Jun 19, 2009
  * Time: 5:08:43 AM
  */
-public class ClearOldDataPointsAction  extends Action {
+@Path(id="/clear_data_points")
+public class ClearOldDataPointsAction  extends AbstractAction {
     public String execute(Map context, HttpServletRequest req, HttpServletResponse resp) throws Exception {
         PersistenceManager pm = PMF.get().getPersistenceManager();
         Query query = pm.newQuery(DataPoint.class);

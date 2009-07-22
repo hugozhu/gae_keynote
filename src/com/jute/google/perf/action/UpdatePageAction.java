@@ -1,8 +1,10 @@
 package com.jute.google.perf.action;
 
-import com.jute.google.framework.Action;
 import com.jute.google.framework.PMF;
+import com.jute.google.framework.AbstractAction;
+import com.jute.google.framework.Path;
 import com.jute.google.perf.model.Page;
+import com.google.inject.Singleton;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +18,10 @@ import java.util.List;
  * Date: Jul 15, 2009
  * Time: 12:36:56 AM
  */
-public class UpdatePageAction  extends Action {
+
+@Singleton
+@Path(id="/update_page")
+public class UpdatePageAction  extends AbstractAction {
 
     public String execute(Map context, HttpServletRequest req, HttpServletResponse resp) throws Exception {
         long id = Integer.parseInt(req.getParameter("id"));

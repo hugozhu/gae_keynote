@@ -3,9 +3,13 @@ package com.jute.google.perf;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.users.UserService;
+import com.google.inject.Singleton;
+import com.google.inject.Injector;
+import com.google.inject.Inject;
+import com.google.inject.Key;
 import com.jute.google.perf.action.*;
-import com.jute.google.framework.Action;
-import com.jute.google.framework.PMF;
+import com.jute.google.perf.dao.PersistenceManagerContextHolder;
+import com.jute.google.framework.*;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
@@ -17,31 +21,23 @@ import javax.jdo.PersistenceManager;
 import java.util.logging.Logger;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 
 /**
  * User: hugozhu
  * Date: Apr 25, 2009
  * Time: 1:38:55 PM
  */
+@Singleton
 public class DispatchServlet extends HttpServlet {
+    @Inject
+    private Injector injector;
+    
     private static final Logger log = Logger.getLogger(DispatchServlet.class.getName());
 
-    private static final Map<String, Action> actions = new HashMap<String, Action>();
-
-    @Override
-    public void init(ServletConfig servletConfig) throws ServletException {
-        super.init(servletConfig);
-         //Todo: load via IoC Container and Java annotation
-        actions.put("/add", new AddDataPointAction());
-        actions.put("/index", new ListPagesAction());
-        actions.put("/top_data_points", new ListTopDataPointsAction());
-        actions.put("/clear_data_points", new ClearOldDataPointsAction());
-        actions.put("/alert", new AlertAction());
-        actions.put("/delete_page", new DeletePageAction());
-        actions.put("/update_page", new UpdatePageAction());
-
-    }
+    private static final Map<String, Action> actions = new ConcurrentHashMap<String, Action>();
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
@@ -51,17 +47,27 @@ public class DispatchServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
                 throws IOException, ServletException {
         Action action = null;
-
         String pathInfo = req.getPathInfo();
         log.info("path info:"+pathInfo);
         if (pathInfo!=null && pathInfo.length()>1) {
             String[] pathParts = pathInfo.substring(1).split("/");
             if (pathParts.length>0 && actions.containsKey("/"+pathParts[0])) {
-                action = actions.get("/"+pathParts[0]);
+                pathInfo = "/"+pathParts[0];
             }
         }
         else {
-            action = actions.get("/index");
+            pathInfo = "/index";
+        }
+
+        action = actions.get(pathInfo);
+        if (action==null) {
+            try {
+                action = injector.getInstance(Key.get(Action.class, PathInfo.path(pathInfo)));
+                if (action!=null) {
+                    actions.put(pathInfo,action);
+                }
+            } catch (Exception e) {
+            }
         }
 
         if (action == null) {
@@ -77,7 +83,9 @@ public class DispatchServlet extends HttpServlet {
         }
 
         String view = null;
+        PersistenceManager pm = null;
         try {
+            PersistenceManagerContextHolder.get();
             view = action.execute(context,req,resp);
             if (view !=null ) {
                 renderView(view,req,resp,context);
@@ -85,11 +93,8 @@ public class DispatchServlet extends HttpServlet {
         } catch (Exception e) {
             throw new ServletException("Failed to execute exception",e);
         }
-        finally{
-            PersistenceManager pm = PMF.get().getPersistenceManager();
-            if (!pm.isClosed()) {
-                pm.close();
-            }
+        finally {
+            PersistenceManagerContextHolder.remove();
         }
     }
 
@@ -103,9 +108,10 @@ public class DispatchServlet extends HttpServlet {
                 req.setAttribute(entry.getKey(),entry.getValue());
             }
         }
+        log.info("render template:"+path);
         RequestDispatcher disp = this.getServletContext().getRequestDispatcher("/WEB-INF/templates/"+path+".jsp");
         if (disp!=null)
-            disp.forward(req,resp);
+            disp.include(req,resp);
     }
 
 }

@@ -1,8 +1,10 @@
 package com.jute.google.perf.action;
 
-import com.jute.google.framework.Action;
 import com.jute.google.framework.PMF;
+import com.jute.google.framework.AbstractAction;
+import com.jute.google.framework.Path;
 import com.jute.google.perf.model.Page;
+import com.google.inject.Singleton;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +18,9 @@ import java.util.List;
  * Date: Jul 1, 2009
  * Time: 11:33:22 PM
  */
-public class DeletePageAction  extends Action {
+@Singleton
+@Path(id="/delete_page")
+public class DeletePageAction  extends AbstractAction {
 
     public String execute(Map context, HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String url = req.getParameter("url");
