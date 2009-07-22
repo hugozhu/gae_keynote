@@ -4,6 +4,7 @@ import com.jute.google.framework.PMF;
 import com.jute.google.framework.AbstractAction;
 import com.jute.google.framework.Path;
 import com.jute.google.perf.model.DataPoint;
+import com.jute.google.perf.dao.PersistenceManagerContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,7 @@ import java.util.Date;
 @Path(id="/clear_data_points")
 public class ClearOldDataPointsAction  extends AbstractAction {
     public String execute(Map context, HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        PersistenceManager pm = PMF.get().getPersistenceManager();
+        PersistenceManager pm = PersistenceManagerContextHolder.get();
         Query query = pm.newQuery(DataPoint.class);
         query.setFilter("date < dateMaximumParam");
         query.declareParameters("java.util.Date dateMaximumParam");

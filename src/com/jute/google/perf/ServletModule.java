@@ -24,8 +24,8 @@ public class ServletModule extends com.google.inject.servlet.ServletModule {
         addAction("/top_data_points", ListTopDataPointsAction.class);
         addAction("/clear_data_points", ClearOldDataPointsAction.class);
         addAction("/alert", AlertAction.class);
-        addAction("/delete_page", DeletePageAction.class);
-        addAction("/update_page", UpdatePageAction.class);
+        addAction("/delete_page.admin", DeletePageAction.class);
+        addAction("/update_page.admin", UpdatePageAction.class);
     }
     
     protected void addAction(String path, Class<? extends Action> c) {

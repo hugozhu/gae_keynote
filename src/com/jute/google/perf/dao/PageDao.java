@@ -13,5 +13,9 @@ import java.util.List;
  */
 @ImplementedBy(PageDaoImpl.class)
 public interface PageDao {
-    List<Page> getAllPages();
+
+    public List<Page> getAllPages();
+
+    public void deletePage(String url);
+    
 }

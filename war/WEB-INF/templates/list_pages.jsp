@@ -5,9 +5,12 @@
 <table border="1">
     <tr>
         <th>Page</th>
+        <th>Code</th>
         <th>Latency</th>
         <th>Time</th>
+        <th>Bytes</th>
         <th>Alert</th>
+        <th>Delete ?</th>
     </tr>
     <%
         List<Page> pages = (List<Page>) request.getAttribute("pages");
@@ -23,19 +26,21 @@
             String action = null;
             if (status==null || status.length()==0) {
                 status = "Set Alert";
-                action = "update_page?id="+p.getId()+"&status=alert";
+                action = "update_page.admin?id="+p.getId()+"&status=alert";
             }
             else {
                 status = "Unset Alert";
-                action = "update_page?id="+p.getId()+"&status=";
+                action = "update_page.admin?id="+p.getId()+"&status=";
             }
-
     %>
     <tr>
         <td><a href="top_data_points?id=<%=p.getId()%>"><%=p.getUrl()%></a></td>
-        <td><%=props.get("last_total")%> ms</td>
+        <td><%=props.getProperty("code","N/A")%></td>
+        <td><%=props.getProperty("last_total")%> ms</td>
         <td><%=diff%> seconds ago</td>
+        <td><%=props.getProperty("length","N/A")%></td>
         <td><a href="<%=action%>"><%=status%></a></td>
+        <td><a href="delete_page.admin?url=<%=p.getUrl()%>" onclick="return confirm('Are you sure?')">Delete</a></td>
     </tr>
     <%
         }

@@ -8,11 +8,13 @@ import com.jute.google.perf.model.Page;
 import com.jute.google.util.HTTPResponse;
 import com.jute.google.util.URLFetcher;
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+import javax.cache.Cache;
 import java.util.Map;
 import java.util.List;
 import java.util.Properties;
@@ -26,6 +28,8 @@ import java.net.URL;
 @Singleton
 @Path(id="/add")
 public class AddDataPointAction extends AbstractAction {
+    @Inject
+    Cache cache;
 
     public String execute(Map context, HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String url = req.getParameter("url");
@@ -51,12 +55,15 @@ public class AddDataPointAction extends AbstractAction {
                 if (response.getContent()!=null) {
                     point.setLength( String.valueOf(response.getContent().length));
                 }
-                pm.makePersistent(point);                
-                Properties properties = page.getProperties();
-                properties.setProperty("last_total",""+point.getTotalTime());
-                properties.setProperty("last_modified",(int) (System.currentTimeMillis()/1000l)+"");
-                page.setProperties(properties);
-                pm.makePersistent(page);
+                pm.makePersistent(point);
+                if (cache!=null)
+                    cache.put(page.getUrl(),point);
+                
+//                Properties properties = page.getProperties();
+//                properties.setProperty("last_total",""+point.getTotalTime());
+//                properties.setProperty("last_modified",(int) (System.currentTimeMillis()/1000l)+"");
+//                page.setProperties(properties);
+//                pm.makePersistent(page);
             } finally {
                 pm.close();
             }

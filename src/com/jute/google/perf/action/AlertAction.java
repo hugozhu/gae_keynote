@@ -6,6 +6,7 @@ import com.jute.google.framework.Path;
 import com.jute.google.util.Mailer;
 import com.jute.google.perf.model.Page;
 import com.jute.google.perf.model.DataPoint;
+import com.jute.google.perf.dao.PersistenceManagerContextHolder;
 import com.google.inject.Singleton;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ public class AlertAction extends AbstractAction {
         if (to==null || to.indexOf("@")<0) {
             to = "hugozhu@gmail.com";
         }
-        PersistenceManager pm = PMF.get().getPersistenceManager();
+        PersistenceManager pm = PersistenceManagerContextHolder.get();
         Query query = pm.newQuery(Page.class);
         query.setFilter("status == statusParam");
         query.declareParameters("String statusParam");

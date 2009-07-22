@@ -5,6 +5,8 @@ import com.jute.google.framework.AbstractAction;
 import com.jute.google.framework.Path;
 import com.jute.google.perf.model.Page;
 import com.google.inject.Singleton;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.api.users.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +35,10 @@ public class UpdatePageAction  extends AbstractAction {
             Page page;
             List<Page> pages = (List<Page>) query.execute(id);
             if (pages != null && !pages.isEmpty()) {
-                page = pages.get(0);
+                page = pages.get(0);                
+                if (req.getUserPrincipal()!=null) {
+                    page.getProperties().setProperty("last_modifier",req.getUserPrincipal().getName());
+                }
                 page.setStatus(req.getParameter("status"));
                 pm.makePersistent(page);
             }

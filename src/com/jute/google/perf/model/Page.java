@@ -15,7 +15,7 @@ import java.io.*;
  * Time: 12:39:39 PM
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class Page {
+public class Page implements Serializable {
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Long id;
@@ -72,18 +72,22 @@ public class Page {
         this.created = created;
     }
 
+    Properties props;
     public Properties getProperties() {
-        Properties props = new Properties();
-        try {
-            if (properties!=null) {
-                props.loadFromXML(new ByteArrayInputStream(properties.getValue().getBytes("UTF-8")));
+        if (props==null) {
+            props = new Properties();
+            try {
+                if (properties!=null) {
+                    props.loadFromXML(new ByteArrayInputStream(properties.getValue().getBytes("UTF-8")));
+                }
+            } catch (IOException e) {
             }
-        } catch (IOException e) {            
         }
         return props;
     }
 
     public void setProperties(Properties props) {
+        this.props = props;
         try {
             OutputStream os = new ByteArrayOutputStream();
             props.storeToXML(os,"","UTF-8");

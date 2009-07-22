@@ -5,6 +5,7 @@ import com.jute.google.framework.AbstractAction;
 import com.jute.google.framework.Path;
 import com.jute.google.perf.model.Page;
 import com.jute.google.perf.model.DataPoint;
+import com.jute.google.perf.dao.PersistenceManagerContextHolder;
 import com.google.inject.Singleton;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ import java.util.List;
 @Path(id="/top_data_points")
 public class ListTopDataPointsAction extends AbstractAction {
     public String execute(Map context, HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        PersistenceManager pm = PMF.get().getPersistenceManager();
+        PersistenceManager pm = PersistenceManagerContextHolder.get();
         long pageId = Long.parseLong(req.getParameter("id"));
         context.put("page",pm.getObjectById(Page.class,pageId));
         Query query = pm.newQuery(DataPoint.class);

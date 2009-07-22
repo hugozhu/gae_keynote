@@ -8,6 +8,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  * User: hugozhu
@@ -15,7 +16,7 @@ import java.util.Date;
  * Time: 12:31:25 PM
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class DataPoint {
+public class DataPoint implements Serializable {
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Long id;

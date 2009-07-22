@@ -3,6 +3,7 @@ package com.jute.google.perf.dao.impl;
 import com.jute.google.perf.model.Page;
 import com.jute.google.perf.dao.PageDao;
 import com.jute.google.perf.dao.AbstractDao;
+import com.jute.google.perf.dao.PersistenceManagerContextHolder;
 import com.jute.google.framework.PMF;
 import com.google.inject.Singleton;
 
@@ -23,4 +24,17 @@ public class PageDaoImpl extends AbstractDao implements PageDao {
         query.setOrdering("url asc");
         return (List<Page>) query.execute();
     }
+
+    public void deletePage(String url) {
+        PersistenceManager pm = getPersistenceManager();
+        Query query = pm.newQuery(Page.class, "url == nameParam");
+        query.declareParameters("String nameParam");
+        Page page;
+        List<Page> pages = (List<Page>) query.execute(url);
+        if (pages != null && !pages.isEmpty()) {
+            page = pages.get(0);
+            pm.deletePersistent(page);
+        }
+    }
+
 }
