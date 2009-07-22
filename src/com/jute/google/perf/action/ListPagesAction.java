@@ -42,7 +42,7 @@ public class ListPagesAction extends AbstractAction {
                     page.getProperties().setProperty("code",p.getCode()+"");
                     page.getProperties().setProperty("last_total",p.getTotalTime()+"");
                     page.getProperties().setProperty("last_modified",p.getDate().getTime()/1000l+"");
-                    page.getProperties().setProperty("length",p.getLength());
+                    page.getProperties().setProperty("length",p.getLength()+"");
                 }
             }
         }
