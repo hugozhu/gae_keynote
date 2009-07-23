@@ -39,10 +39,7 @@ public class ListPagesAction extends AbstractAction {
             for(Page page: pages) {
                 DataPoint p = (DataPoint) cache.get(page.getUrl());
                 if (p!=null) {
-                    page.getProperties().setProperty("code",p.getCode()+"");
-                    page.getProperties().setProperty("last_total",p.getTotalTime()+"");
-                    page.getProperties().setProperty("last_modified",p.getDate().getTime()/1000l+"");
-                    page.getProperties().setProperty("length",p.getLength()+"");
+                    page.rememberLastDataPoint(p);
                 }
             }
         }

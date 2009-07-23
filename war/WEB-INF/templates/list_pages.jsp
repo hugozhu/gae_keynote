@@ -22,6 +22,13 @@
                 before = Integer.parseInt((String)props.get("last_modified"));
             }
             int diff = now - before;
+            String diffString = "";
+            if (diff > 60) {
+                diffString = (int) (diff/60) + " minutes";
+            }
+            else {
+                diffString = diff + " seconds";
+            }
             String status = p.getStatus();
             String action = null;
             if (status==null || status.length()==0) {
@@ -37,7 +44,7 @@
         <td><a href="top_data_points?id=<%=p.getId()%>"><%=p.getUrl()%></a></td>
         <td><%=props.getProperty("code","N/A")%></td>
         <td><%=props.getProperty("last_total")%> ms</td>
-        <td><%=diff%> seconds ago</td>
+        <td><%=diffString%> ago</td>
         <td><%=props.getProperty("length","N/A")%></td>
         <td><a href="<%=action%>"><%=status%></a></td>
         <td><a href="delete_page.admin?url=<%=p.getUrl()%>" onclick="return confirm('Are you sure?')">Delete</a></td>

@@ -104,4 +104,17 @@ public class Page implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+    
+    public void rememberLastDataPoint(DataPoint p) {
+        getProperties().setProperty("code",p.getCode()+"");
+        getProperties().setProperty("last_total",p.getTotalTime()+"");
+        getProperties().setProperty("last_modified",p.getDate().getTime()/1000l+"");
+        int length = -1;
+        try {
+            length = Integer.parseInt(p.getLength());
+            length = length/1024;
+        }
+        catch (Exception e) {}
+        getProperties().setProperty("length",length+" K");
+    }
 }

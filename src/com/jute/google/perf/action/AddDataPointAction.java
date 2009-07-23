@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Properties;
 import java.net.URL;
 
+import com.jute.google.perf.dao.PersistenceManagerContextHolder;
+
 /**
  * User: hugozhu
  * Date: Apr 25, 2009
@@ -34,7 +36,7 @@ public class AddDataPointAction extends AbstractAction {
     public String execute(Map context, HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String url = req.getParameter("url");
         if (url!=null) {
-            PersistenceManager pm = PMF.get().getPersistenceManager();
+            PersistenceManager pm = PersistenceManagerContextHolder.get();
 
             Query query = pm.newQuery(Page.class, "url == nameParam");
             query.declareParameters("String nameParam");
@@ -51,21 +53,18 @@ public class AddDataPointAction extends AbstractAction {
             HTTPResponse response = URLFetcher.get(new URL(url));
             DataPoint point = new DataPoint(page.getId(), response.getConnectTime(), response.getReadTime(), response.getResponseCode());
 
-            try {
-                if (response.getContent()!=null) {
-                    point.setLength( String.valueOf(response.getContent().length));
-                }
-                pm.makePersistent(point);
-                if (cache!=null)
+            if (response.getContent()!=null) {
+                point.setLength( String.valueOf(response.getContent().length));
+            }
+            pm.makePersistent(point);
+            if (cache!=null) {
+                try {
                     cache.put(page.getUrl(),point);
-                
-//                Properties properties = page.getProperties();
-//                properties.setProperty("last_total",""+point.getTotalTime());
-//                properties.setProperty("last_modified",(int) (System.currentTimeMillis()/1000l)+"");
-//                page.setProperties(properties);
-//                pm.makePersistent(page);
-            } finally {
-                pm.close();
+                }
+                catch (Exception e) {
+                    page.rememberLastDataPoint(point);
+                    pm.makePersistent(page);                        
+                }
             }
 
             return null;
