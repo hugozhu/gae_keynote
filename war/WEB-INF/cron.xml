@@ -1,77 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
   <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.dxy.cn%2Fcms%2F</url>
+    <url>/perf/add?url=http://www.alibaba.com</url>
     <description>Check latency every 1 minutes</description>
     <schedule>every 1 minutes</schedule>
   </cron>
   <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.jobmd.cn%2F</url>
-    <description>Check latency every 1 minutes</description>
-    <schedule>every 1 minutes</schedule>
-  </cron>
-  <cron>
-    <url>/perf/add?url=http%3A%2F%2Ftong.dxy.cn%2F</url>
-    <description>Check latency every 1 minutes</description>
-    <schedule>every 1 minutes</schedule>
-  </cron>
-  <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.dxy.cn%2Fbbs%2Findex.html</url>
-    <description>Check latency every 1 minutes</description>
-    <schedule>every 1 minutes</schedule>
-  </cron>
-  <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.dxyer.cn%2F</url>
-    <description>Check latency every 1 minutes</description>
-    <schedule>every 1 minutes</schedule>
-  </cron>
-  <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.bioon.com%2F</url>
-    <description>Check latency every 1 minutes</description>
-    <schedule>every 1 minutes</schedule>
-  </cron>
-  <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.bioon.com.cn%2F</url>
-    <description>Check latency every 1 minutes</description>
-    <schedule>every 1 minutes</schedule>
-  </cron>    
-  <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.taobao.com%2F</url>
-    <description>Check latency every 1 minutes</description>
-    <schedule>every 1 minutes</schedule>
-  </cron>
-  <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.haoyisheng.com%2F</url>
-    <description>Check latency every 1 minutes</description>
-    <schedule>every 1 minutes</schedule>
-  </cron>
-  <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.iiyi.com%2F</url>
-    <description>Check latency every 1 minutes</description>
-    <schedule>every 1 minutes</schedule>
-  </cron>
-  <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.dxy.cn%2F404%2Ferror.html</url>
-    <description>Check latency every 1 minutes</description>
-    <schedule>every 1 minutes</schedule>
-  </cron>
-  <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.dxy.cn%2Fbbs%2Fstatus.jsp</url>
-    <description>Check latency every 1 minutes</description>
-    <schedule>every 1 minutes</schedule>
-  </cron>
-  <cron>
-    <url>/perf/add?url=http%3A%2F%2Fpharma.dxy.cn%2F</url>
+    <url>/perf/add?url=http://www.taobao.com</url>
     <description>Check latency every 1 minutes</description>
     <schedule>every 1 minutes</schedule>
   </cron>  
+  <cron>
+    <url>/perf/add?url=http://www.alipay.com</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>  
+  <cron>
+    <url>/perf/add?url=http://www.baidu.com</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron> 
+  <cron>
+    <url>/perf/add?url=http://g.cn</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>   
+  <cron>
+    <url>/perf/add?url=http://www.sina.com.cn</url>
+    <description>Check latency every 1 minutes</description>
+    <schedule>every 1 minutes</schedule>
+  </cron> 
   <cron>
     <url>/perf/clear_data_points</url>
     <description>Delete data 1 month ago</description>
     <schedule>every 59 minutes</schedule>
   </cron>
   <cron>
-    <url>/perf/alert?to=dev%40dxyer.com</url>
+    <url>/perf/alert?to=hugozhu%40gmail.com</url>
     <description>Check if there are errors</description>
     <schedule>every 5 minutes</schedule>
   </cron>
