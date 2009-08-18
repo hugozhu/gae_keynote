@@ -22,6 +22,11 @@ import java.util.Date;
 @Path(id="/clear_data_points")
 public class ClearOldDataPointsAction  extends AbstractAction {
     public String execute(Map context, HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        int monthes = 1;
+        String m = req.getParameter("monthes");
+        if (m!=null) {
+            monthes = Integer.parseInt(m);
+        }
         PersistenceManager pm = PersistenceManagerContextHolder.get();
         Query query = pm.newQuery(DataPoint.class);
         query.setFilter("date < dateMaximumParam");
@@ -29,7 +34,7 @@ public class ClearOldDataPointsAction  extends AbstractAction {
         query.setOrdering("date asc");
         query.setRange(0,200);
         Date threeMonthAgo = new Date();
-        threeMonthAgo.setTime(threeMonthAgo.getTime()-3*24*3600*30*1000l);
+        threeMonthAgo.setTime(threeMonthAgo.getTime()-monthes * 24*3600*30*1000l);
         List<DataPoint> points = (List<DataPoint>) query.execute(threeMonthAgo);
         if (points.size()>0) {
             pm.deletePersistentAll(points);

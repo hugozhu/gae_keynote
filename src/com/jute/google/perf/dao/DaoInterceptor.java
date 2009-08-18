@@ -16,10 +16,10 @@ public class DaoInterceptor implements MethodInterceptor {
       }
 
       try {
-          ((AbstractDao)invocation.getThis()).setPersistenceManager(PMF.get().getPersistenceManager());
+//          ((AbstractDao)invocation.getThis()).setPersistenceManager(PMF.get().getPersistenceManager());
           return invocation.proceed();
       } finally {
-          
+
       }
   }
 }
