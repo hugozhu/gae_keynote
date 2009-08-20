@@ -36,7 +36,7 @@
     <schedule>every 1 minutes</schedule>
   </cron>
   <cron>
-    <url>/perf/add?url=http%3A%2F%2Fwww.taobao.com%2F</url>
+    <url>/perf/add?url=http%3A%2F%2Fi.0dxy.cn%2Fimages_new%2Fcss%2Fstyle.css</url>
     <description>Check latency every 1 minutes</description>
     <schedule>every 1 minutes</schedule>
   </cron>
@@ -68,7 +68,7 @@
   <cron>
     <url>/perf/clear_data_points</url>
     <description>Delete data 1 month ago</description>
-    <schedule>every 1 minutes</schedule>
+    <schedule>every 3 minutes</schedule>
   </cron>
   <cron>
     <url>/perf/alert?to=dev%40dxyer.com</url>

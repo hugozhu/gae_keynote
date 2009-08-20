@@ -32,7 +32,7 @@ public class ListTopDataPointsAction extends AbstractAction {
         query.setFilter("pageId == pageIdParam");
         query.setOrdering("date desc");
         query.declareParameters("Long pageIdParam");
-        query.setRange(0,120);
+        query.setRange(0,200);
         List<DataPoint> points = (List<DataPoint>) query.execute(pageId);
         context.put("points",points);
         return "list_top_data_points";

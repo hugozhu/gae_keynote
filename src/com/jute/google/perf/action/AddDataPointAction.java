@@ -57,14 +57,19 @@ public class AddDataPointAction extends AbstractAction {
                 point.setLength( String.valueOf(response.getContent().length));
             }
             pm.makePersistent(point);
+            
             if (cache!=null) {
                 try {
                     cache.put(page.getUrl(),point);
                 }
                 catch (Exception e) {
                     page.rememberLastDataPoint(point);
-                    pm.makePersistent(page);                        
+                    pm.makePersistent(page);
                 }
+            }
+            else {
+                page.rememberLastDataPoint(point);
+                pm.makePersistent(page);
             }
 
             return null;

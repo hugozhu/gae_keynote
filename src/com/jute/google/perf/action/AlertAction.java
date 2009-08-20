@@ -53,7 +53,7 @@ public class AlertAction extends AbstractAction {
             resp.getWriter().println(error+"\t"+page.getUrl());
             if (error >= 4) {
                 subject = "[Alert] "+page.getUrl()+" - "+error+" errors in last 5 minutes";
-                body = "Please check http://jute.appspot.com/perf/top_data_points?id="+page.getId() +" \n"+page.getStatus();
+                body = "Please check http://"+req.getServerName()+"/perf/top_data_points?id="+page.getId() +" \n"+page.getStatus();
                 Mailer.send(subject, body, to);                
             }
         }

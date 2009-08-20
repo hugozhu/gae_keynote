@@ -41,7 +41,7 @@
             }
     %>
     <tr>
-        <td><a href="top_data_points?id=<%=p.getId()%>"><%=p.getUrl()%></a></td>
+        <td><a href="top_data_points?id=<%=p.getId()%>" target="_blank"><%=p.getUrl()%></a></td>
         <td><%=props.getProperty("code","N/A")%></td>
         <td><%=props.getProperty("last_total")%> ms</td>
         <td><%=diffString%> ago</td>
